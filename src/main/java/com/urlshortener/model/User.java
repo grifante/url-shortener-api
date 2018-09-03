@@ -3,6 +3,11 @@ package com.urlshortener.model;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 @Entity
 public class User {
 
@@ -15,9 +20,4 @@ public class User {
 	public User(String id) {
 		this.id = id;
 	}
-
-	public String getId() {
-		return id;
-	}
-
 }

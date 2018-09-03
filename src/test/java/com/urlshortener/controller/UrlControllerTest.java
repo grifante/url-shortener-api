@@ -5,7 +5,6 @@ import static org.springframework.http.HttpStatus.NOT_FOUND;
 import static org.springframework.http.HttpStatus.OK;
 
 import org.junit.Test;
-import org.springframework.http.ResponseEntity;
 
 import com.urlshortener.model.Url;
 import com.urlshortener.model.User;
@@ -14,29 +13,31 @@ public class UrlControllerTest extends BaseControllerTest {
 
 	@Test
 	public void testGetUrl() {
-		Url url = newUrl();
-		ResponseEntity<String> responseOk = restTemplate.getForEntity("/urls/" + url.getId(), String.class);
-		assertThat(OK).isEqualTo(responseOk.getStatusCode());
+		var url = newUrl();
+		var statusCode = restTemplate.getForEntity("/urls/" + url.getId(), String.class).getStatusCode();
+		assertThat(OK).isEqualTo(statusCode);
 	}
 
 	@Test
 	public void testGetUrlNotFound() {
-		ResponseEntity<String> responseNotFound = restTemplate.getForEntity("/urls/1", String.class);
-		assertThat(NOT_FOUND).isEqualTo(responseNotFound.getStatusCode());
+		var statusCode = restTemplate.getForEntity("/urls/1", String.class).getStatusCode();
+		assertThat(NOT_FOUND).isEqualTo(statusCode);
 	}
 
 	@Test
 	public void testDelete() {
-		Url url = newUrl();
+		var url = newUrl();
+		
 		assertThat(urlRepository.count()).isEqualTo(1);
 
 		restTemplate.delete("/urls/" + url.getId());
+		
 		assertThat(urlRepository.count()).isEqualTo(0);
 	}
 
 	private Url newUrl() {
-		User user = userRepository.save(new User("user-a"));
-		Url url = new Url();
+		var user = userRepository.save(new User("user-a"));
+		var url = new Url();
 		url.setUserId(user.getId());
 		url.setUrl("http://www.google.com");
 		url.setShortUrl("http://localhost:8181/PrNuQZB");

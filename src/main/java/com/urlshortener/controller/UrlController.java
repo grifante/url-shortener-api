@@ -43,7 +43,7 @@ public class UrlController {
 
 	private Object getRedirect(Url url) {
 		executor.submit(() -> repository.incrementHits(url.getId()));
-		RedirectView redirectView = new RedirectView(url.getUrl());
+		var redirectView = new RedirectView(url.getUrl());
 		redirectView.setStatusCode(MOVED_PERMANENTLY);
 		return redirectView;
 	}

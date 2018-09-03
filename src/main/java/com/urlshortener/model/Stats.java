@@ -2,6 +2,11 @@ package com.urlshortener.model;
 
 import java.util.List;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class Stats {
 
 	private long hits;
@@ -11,22 +16,11 @@ public class Stats {
 	public Stats() {
 	}
 
-	public Stats(long hits, long urlCount, List<Url> topUrls) {
+	public Stats(final long hits, final long urlCount,
+			final List<Url> topUrls) {
 		this.hits = hits;
 		this.urlCount = urlCount;
 		this.topUrls = topUrls;
-	}
-
-	public long getHits() {
-		return hits;
-	}
-
-	public long getUrlCount() {
-		return urlCount;
-	}
-
-	public List<Url> getTopUrls() {
-		return topUrls;
 	}
 
 }
